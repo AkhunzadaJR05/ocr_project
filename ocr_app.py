@@ -2,6 +2,7 @@ import streamlit as st
 import pytesseract
 from PIL import Image
 from docx import Document
+import shutil
 import re
 import os
 from io import BytesIO
@@ -72,7 +73,12 @@ def extract_data_from_image(image):
     """
     Orchestrates the OCR process and data extraction from the uploaded image.
     """
-    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+    tesseract_path = shutil.which('tesseract')
+    if tesseract_path:
+        pytesseract.pytesseract.tesseract_cmd = tesseract_path
+    else:
+        st.error("Tesseract not found. Please check your packages.txt file.")
+        st.stop()
 
     text = pytesseract.image_to_string(image)
     
