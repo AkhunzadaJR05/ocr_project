@@ -72,7 +72,8 @@ def extract_data_from_image(image):
     """
     Orchestrates the OCR process and data extraction from the uploaded image.
     """
-    
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+
     text = pytesseract.image_to_string(image)
     
     # Use a more robust chain of patterns for each field
