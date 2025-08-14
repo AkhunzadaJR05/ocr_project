@@ -1,5 +1,3 @@
-# Code 1
-
 import streamlit as st
 import pytesseract
 from PIL import Image
@@ -8,9 +6,6 @@ import re
 import os
 from io import BytesIO
 
-# Path to Tesseract on your machine
-# Please ensure this path is correct for your installation
-TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 TEMPLATE_PATH = "sales_receipt.docx"
 
 # Predefined lists for more robust Make and Model extraction
@@ -31,8 +26,6 @@ COMMON_MODELS = {
     "COROLLA": ["COROLLA"]
 }
 
-
-# Helper function for safe data extraction
 def safe_extract(text, pattern, group=1):
     """
     Extracts data using a regex pattern, returning None if no match is found.
@@ -79,7 +72,7 @@ def extract_data_from_image(image):
     """
     Orchestrates the OCR process and data extraction from the uploaded image.
     """
-    pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+    
     text = pytesseract.image_to_string(image)
     
     # Use a more robust chain of patterns for each field
